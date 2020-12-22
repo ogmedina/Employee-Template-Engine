@@ -8,6 +8,61 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+
+
+const newManager = () =>
+inquirer.prompt([
+    {
+        type: 'input',
+        message: 'What is your manager\'s name?',
+        name: 'name',
+    },
+    {
+        type: 'input',
+        message: 'What is your manager\'s id?',
+        name: 'id',
+    },
+    {
+        type: 'input',
+        message: 'What is your manager\'s email?',
+        name: 'email',
+    },
+    {
+        type: 'input',
+        message: 'What is your manager\'s office number?',
+        name: 'officeNumber',
+    }
+])
+
+const newEngineer = () =>
+inquirer.prompt([
+    {
+        type: 'input',
+        message: 'What is your engineer\'s name?',
+        name: 'name',
+    },
+    {
+        type: 'input',
+        message: 'What is your engineer\'s id?',
+        name: 'id',
+    },
+    {
+        type: 'input',
+        message: 'What is your engineer\'s email?',
+        name: 'email',
+    },
+    {
+        type: 'input',
+        message: 'What is your engineer\'s GitHub username?',
+        name: 'github',
+    }
+])
+
+newManager();
+
+
+
+
 const render = require("./lib/htmlRenderer");
 
 
