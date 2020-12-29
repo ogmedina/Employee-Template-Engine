@@ -6,93 +6,137 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-
-const employeeObjects = [];
+//Team is an array that builds the answers from the responses
+let team = [];
 //Output Directory file and path. This goes to the output folder, and creates an html called team
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-
-
-
-const newManager = () =>
-inquirer.prompt([
-    {
-        type: 'input',
-        message: 'What is your manager\'s name?',
-        name: 'name',
-    },
-    {
-        type: 'input',
-        message: 'What is your manager\'s id?',
-        name: 'id',
-    },
-    {
-        type: 'input',
-        message: 'What is your manager\'s email?',
-        name: 'email',
-    },
-    {
-        type: 'input',
-        message: 'What is your manager\'s office number?',
-        name: 'officeNumber',
-    }
-])
-
-const newEngineer = () =>
-inquirer.prompt([
-    {
-        type: 'input',
-        message: 'What is your engineer\'s name?',
-        name: 'name',
-    },
-    {
-        type: 'input',
-        message: 'What is your engineer\'s id?',
-        name: 'id',
-    },
-    {
-        type: 'input',
-        message: 'What is your engineer\'s email?',
-        name: 'email',
-    },
-    {
-        type: 'input',
-        message: 'What is your engineer\'s GitHub username?',
-        name: 'github',
-    }
-])
-
-newManager();
-
-const newIntern = () =>
-inquirer.prompt([
-    {
-        type: 'input',
-        message: 'What is your intern\'s name?',
-        name: 'name',
-    },
-    {
-        type: 'input',
-        message: 'What is your intern\s id?',
-        name: 'id',
-    },
-    {
-        type: 'input',
-        message: 'What is your intern\'s email?',
-        name: 'email',   
-    },
-    {
-        type: 'input',
-        message: 'What is your intern\'s school?',
-        name: 'school'        
-    }
-
-
-])
-
-
+//This is the htmlrenderer and is from another file
 const render = require("./lib/htmlRenderer");
 
+//This is the main function that asks through inquirer what role the user would like to add, and then 
+//based on the response is then sent to the appropriate inquirer questions
+function newTeam() {
+    inquirer.prompt([
+        {
+            type: "list",
+            message: "What role would you like to add to your team?",
+            choices: [
+                "Manager",
+                "Engineer",
+                "Intern",
+                "Done!"
+            ],
+            name: "role"   
+
+        }]).then(function(response){
+            if (response.role === "Manager"){
+                newManager();
+            } else if (response.role === "Engineer"){
+                newEngineer();
+            } else if (response.role === "Intern"){
+                newIntern();
+            } else if (response.role === "Done!"){ //When the user is done, the file is written with the team array and the render html function
+                fs.writeFileSync(outputPath, render(team), "utf-8");
+            } else {
+                console.log("Error with responses, please check data");
+            } 
+        });
+}
+
+newTeam();
+
+//This is the function for a New Manager, it asks questions using inquirer
+function newManager() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is your manager\'s name?',
+            name: 'name',
+        },
+        {
+            type: 'input',
+            message: 'What is your manager\'s id?',
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: 'What is your manager\'s email?',
+            name: 'email',
+        },
+        {
+            type: 'input',
+            message: 'What is your manager\'s office number?',
+            name: 'officeNumber',
+        }    
+    ]).then(function(response){
+        //Once the responses are collected they are pushed to the array of team as a New Manager
+        team.push(new Manager(response.name, response.id, response.email, response.officeNumber));
+        //Then the function goes back to the main question
+        newTeam();
+    })
+}
+
+//This is the function for a New Engineer, it asks questions using inquirer
+function newEngineer(){
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is your engineer\'s name?',
+            name: 'name',
+        },
+        {
+            type: 'input',
+            message: 'What is your engineer\'s id?',
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: 'What is your engineer\'s email?',
+            name: 'email',
+        },
+        {
+            type: 'input',
+            message: 'What is your engineer\'s GitHub username?',
+            name: 'github',
+        }
+    ]).then(function(response){
+        //Once the responses are collected they are pushed to the array of team as a New Engineer
+        team.push(new Engineer(response.name, response.id, response.email, response.github));
+        //Then the function goes back to the main question
+        newTeam();
+    });
+}
+//This is the function for a New Intern, it asks questions using inquirer
+function newIntern(){
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is your intern\'s name?',
+            name: 'name',
+        },
+        {
+            type: 'input',
+            message: 'What is your intern\s id?',
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: 'What is your intern\'s email?',
+            name: 'email',   
+        },
+        {
+            type: 'input',
+            message: 'What is your intern\'s school?',
+            name: 'school'        
+        } 
+    ]).then(function(response){
+        //Once the responses are collected they are pushed to the array of team as a New Intern
+        team.push(new Intern(response.name, response.id, response.email, response.school));
+        //Then the function goes back to the main question
+        newTeam();
+    });
+}
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
