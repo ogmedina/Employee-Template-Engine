@@ -1,0 +1,29 @@
+.team-heading{
+    background-color: #293241;
+    color: white;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+body{
+    background-color: #3D5A80;
+}
+
+.card {
+  margin-right: 15px;   
+}
+
+.card-title {
+    text-align: center;
+}
+
+.card-header {
+    background-color: #EE6C4D;
+    color: white;
+}
+
+.card-body {
+    background-color: #F5F5F5;
+}

@@ -38,6 +38,7 @@ function newTeam() {
                 newIntern();
             } else if (response.role === "Done!"){ //When the user is done, the file is written with the team array and the render html function
                 fs.writeFileSync(outputPath, render(team), "utf-8");
+                console.log("File written! Please check the output folder for the completed html")
             } else {
                 console.log("Error with responses, please check data");
             } 
