@@ -26,9 +26,9 @@ node app.js
 ### Screenshots 
 [Here](http://bit.ly/3p0x7DJ) is a video walkthrough of the project.
 
-![readme1](./images/ooptemplate1.JPG)
+![readme1](./Images/ooptemplate1.JPG)
 
-![readme2](./images/ooptemplate2.JPG)
+![readme2](./Images/ooptemplate2.JPG)
 
 ### License
 This project is licensed under the MIT License. 
