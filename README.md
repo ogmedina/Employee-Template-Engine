@@ -24,7 +24,7 @@ The program can then be run using the following command line in the bash termina
 node app.js
 ```
 ### Screenshots 
-[Here](http://bit.ly/3p0x7DJ) is a video walkthrough of the project.
+[Here](http://bit.ly/3n9fxw0) is a video walkthrough of the project.
 
 ![readme1](./Images/ooptemplate1.JPG)
 
