@@ -1,10 +1,7 @@
-# Homework-OOP-Template-Engine
-![GitHub](https://img.shields.io/github/license/ogmedina/Homework-OOP-Template-Engine)
+# Employee Template Engine
+![GitHub](https://img.shields.io/github/license/ogmedina/Employee-Template-Engine)
 
-## Full Stack Boot Camp Homework 10 - Template Engine
-
-### Description
-This is the tenth assignment for the UTSA Full-Stack Bootcamp. It is a Node.js command-line application that takes in information about employees and dynamically generates an HTML webpage that displays summaries for each individual.
+This repo is a Node.js command-line application that takes in information about employees and dynamically generates an HTML webpage that displays summaries for each individual.
 
 ### Table of Contents
 
